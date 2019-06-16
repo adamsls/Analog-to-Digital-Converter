@@ -43,7 +43,7 @@ void ShowPWMX(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v
     Serial.println(x_g_force);
 }
 
-void ShowPWMY(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v){
+void ShowPWMY(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v, double y_g_force){
     Serial.print("Y\t\t");
     Serial.print(thi);
     Serial.print("\t\t");
@@ -52,10 +52,11 @@ void ShowPWMY(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v
     Serial.print(tpwm);
     Serial.print("\t\t");
     Serial.print(v);
-    Serial.println("");
+    Serial.print("\t\t");
+    Serial.println(y_g_force);
 }
 
-void ShowPWMZ(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v){
+void ShowPWMZ(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v, double y_g_force){
     Serial.print("Z\t\t");
     Serial.print(thi);
     Serial.print("\t\t");
@@ -64,7 +65,8 @@ void ShowPWMZ(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v
     Serial.print(tpwm);
     Serial.print("\t\t");
     Serial.print(v);
-    Serial.println(""); 
+    Serial.print("\t\t");
+    Serial.println(z_g_force);
 }
 /***********************************************
 *  Function    : PrintMenu
@@ -74,7 +76,7 @@ void ShowPWMZ(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v
 *              : menu to the screen
 ***********************************************/
 void PrintMenu(void){
-  Serial.println("Press 'f' to calibrate (note G-force values unavailable without calibration)");
+  Serial.println("Press 'f' to calibrate");
   Serial.println("Press 't' to toggle the TSIG1");
   Serial.println("Press 'm' to show this menu"); 
   Serial.println("Press 'x' to measure Channel X");

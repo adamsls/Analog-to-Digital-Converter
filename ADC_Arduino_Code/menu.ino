@@ -82,7 +82,7 @@ void Decode(char cmd){
       
     case '1': 
       calibrated_x_0 = Calibrate(PWMX);
-      x_g_force = 0;
+      x_g_force = 1;
       Serial.print("0 degrees: ");
       Serial.println(calibrated_x_0);
       Serial.print("G force: ");
@@ -92,7 +92,7 @@ void Decode(char cmd){
 
    case '2': 
       calibrated_x_90 = Calibrate(PWMX);
-      x_g_force = -1;
+      x_g_force = 0;
       Serial.print("180 degrees: ");
       Serial.println(calibrated_x_90);
       Serial.print("G force: ");
@@ -102,7 +102,7 @@ void Decode(char cmd){
 
    case '3': 
       calibrated_x_270 = Calibrate(PWMX);
-      x_g_force = 1;
+      x_g_force = -1;
       Serial.print("360 degrees: ");
       Serial.println(calibrated_x_270);
       Serial.print("G force: ");

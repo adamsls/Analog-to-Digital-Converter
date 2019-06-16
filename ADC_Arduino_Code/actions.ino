@@ -16,8 +16,14 @@ Description   :This file implements the actions needed to for the
 void MeasurePWMX(byte cmd){
 
       switch(cmd){
+        int final_val = 0;
         case THI:
-          pwm_x_thi = ReadPulse(PWMX,HIGH);
+          for (int i = 0; i < 10; i++){
+              int input = ReadPulse(PWMX,HIGH);
+              final_val += input;
+      
+           }
+          pwm_x_thi = final_val/10;
           pwm_x_measurement = TLO;
           break;
         case TLO:
@@ -34,7 +40,7 @@ void MeasurePWMX(byte cmd){
           break;
         //determine G force values using function 'convert_to_g'
         case GF:
-          x_g_force = convert_to_g(pwm_x_vin, calibrated_x_0, calibrated_x_90);         
+          x_g_force = convert_to_g(pwm_x_vin);         
           pwm_x_measurement = SHOW;
           break;
         case SHOW:
@@ -51,10 +57,15 @@ void MeasurePWMX(byte cmd){
 void MeasurePWMY(byte cmd){
 
       switch(cmd){
+        int final_val = 0;
         case THI:
-          pwm_y_thi = ReadPulse(PWMY,HIGH);
+          for (int i = 0; i < 10; i++){
+              int input = ReadPulse(PWMY,HIGH);
+              final_val += input;
+      
+           }
+          pwm_y_thi = final_val/10;
           pwm_y_measurement = TLO;
-          break;
         case TLO:
           pwm_y_tlo = ReadPulse(PWMY,LOW);
           pwm_y_measurement = TPWM;
@@ -65,11 +76,16 @@ void MeasurePWMY(byte cmd){
           break;
         case VPWM:
           pwm_y_vin = CalculateVin(pwm_y_thi);         
+          pwm_y_measurement = GF;
+          break;
+        //determine G force values using function 'convert_to_g'
+        case GF:
+          y_g_force = convert_to_g(pwm_y_vin);         
           pwm_y_measurement = SHOW;
           break;
         case SHOW:
           ChannelHeader();          
-          ShowPWMY(pwm_y_thi,pwm_y_tlo,pwm_y_tpwm,pwm_y_vin);
+          ShowPWMY(pwm_y_thi,pwm_y_tlo,pwm_y_tpwm,pwm_y_vin, y_g_force);
           pwm_y_measurement = DONE;
           break;
         case DONE:
@@ -82,9 +98,14 @@ void MeasurePWMZ(byte cmd){
 
       switch(cmd){
         case THI:
-          pwm_z_thi = ReadPulse(PWMZ,HIGH);
+          int final_val = 0;
+          for (int i = 0; i < 10; i++){
+              int input = ReadPulse(PWMZ,HIGH);
+              final_val += input;
+      
+           }
+          pwm_z_thi = final_val/10;
           pwm_z_measurement = TLO;
-          break;
         case TLO:
           pwm_z_tlo = ReadPulse(PWMZ,LOW);
           pwm_z_measurement = TPWM;
@@ -95,11 +116,16 @@ void MeasurePWMZ(byte cmd){
           break;
         case VPWM:
           pwm_z_vin = CalculateVin(pwm_z_thi);         
+          pwm_z_measurement = GF;
+          break;
+        //determine G force values using function 'convert_to_g'
+        case GF:
+          z_g_force = convert_to_g(pwm_z_vin);         
           pwm_z_measurement = SHOW;
           break;
         case SHOW:
           ChannelHeader();         
-          ShowPWMZ(pwm_z_thi,pwm_z_tlo,pwm_z_tpwm,pwm_z_vin);
+          ShowPWMZ(pwm_z_thi,pwm_z_tlo,pwm_z_tpwm,pwm_z_vin, z_g_force);
           pwm_z_measurement = DONE;
           break;
         case DONE:

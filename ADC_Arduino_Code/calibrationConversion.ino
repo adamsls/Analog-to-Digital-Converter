@@ -12,26 +12,25 @@ float Calibrate (int channel) {
      float Vin = ReadPulse(channel,HIGH);
      current_val = CalculateVin(Vin);
      final_val += current_val;
-     average_val = final_val/10;
-      
   }
+
+    average_val = final_val/10;
     return average_val;
 
   }
 
-  float convert_to_g(float Vin, float cal_90, float cal_270) {
+  float convert_to_g(float Vin) {
 
-    float a = Vin - cal_90;
-    Serial.println(a);
-    float b = cal_270 - cal_90;
-    Serial.println(b);
-    float c = a / b;
-    Serial.println(c);
-    float g_force = c - 1;
-    Serial.println(g_force);
-    
-    //float g_force = 2((Vin - cal_0)/(cal_270 - cal_0)) - 1;
+    float max_volt = 3.3;
+    float min_volt = 0.0;
+    float volt_range = max_volt - min_volt;
+    float g_max = 3.0;
+    float g_min = -3.0;
+    float g_range = g_max - g_min;
+    float g_force = g_min + (((Vin - min_volt)*g_range)/volt_range);
 
-
+    if (Vin > max_volt) {
+      Serial.println("Error");
+      }
     return (g_force);
     }

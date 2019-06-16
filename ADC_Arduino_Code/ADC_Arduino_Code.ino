@@ -3,7 +3,7 @@ Filename      :ADC Arduino Code
 Author        :Fergal Brennan
                Linda Adams
 Course        :FLASHE Project
-Description   :This is the main file for the FLAHSE project
+Description   :This is the main file for the FLASHE project
 ******************************************************************/
 
 /******************************************************************
@@ -135,13 +135,13 @@ void loop() {
   if(ok_to_measure_pwmx == 1){
     
     MeasurePWMX(pwm_x_measurement);
-    delay(100);                       //Wait for 100msec before continuing
+    delay(50);       
 
     
     if(pwm_x_measurement == DONE){
       if(cont_flag == true) {
-      pwm_x_measurement = THI;
-      ok_to_measure_pwmx = 1;         //If we've measured everything then stop
+         pwm_x_measurement = THI;
+         ok_to_measure_pwmx = 1;        
     }
     else if (cont_flag == false){
        ok_to_measure_pwmx = 0;       
@@ -152,17 +152,17 @@ void loop() {
 
     if(ok_to_measure_pwmy == 1){
     
-    MeasurePWMY(pwm_y_measurement);
-    delay(100);                       //Wait for 100msec before continuing
+    MeasurePWMY(pwm_y_measurement);    
+    delay(50);                      
     
     if(pwm_y_measurement == DONE){
       if(cont_flag == true) {
-      pwm_y_measurement = THI;
-      ok_to_measure_pwmy = 1;         //If we've measured everything then stop
+         pwm_y_measurement = THI;
+         ok_to_measure_pwmy = 1;       
     }
     else if (cont_flag == false){
        ok_to_measure_pwmy = 0;       
-      }        //If we've measured everything then stop
+      }        
     }
     
   }
@@ -170,16 +170,16 @@ void loop() {
   if(ok_to_measure_pwmz == 1){
     
     MeasurePWMZ(pwm_z_measurement);
-    delay(100);                       //Wait for 100msec before continuing
+    delay(50);                 
     
     if(pwm_z_measurement == DONE){
       if(cont_flag == true) {
-      pwm_z_measurement = THI;
-      ok_to_measure_pwmz = 1;         //If we've measured everything then stop
+         pwm_z_measurement = THI;
+         ok_to_measure_pwmz = 1;       
     }
     else if (cont_flag == false){
        ok_to_measure_pwmz = 0;       
-      }        //If we've measured everything then stop
+      }     
     }
     
   }
