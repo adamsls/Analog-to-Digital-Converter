@@ -76,7 +76,7 @@ void ShowPWMZ(unsigned long thi, unsigned long tlo, unsigned long tpwm, double v
 void PrintMenu(void){
   Serial.println("Press 'f' to calibrate (note G-force values unavailable without calibration)");
   Serial.println("Press 't' to toggle the TSIG1");
-  Serial.println("Press 'v' to view this menu"); 
+  Serial.println("Press 'm' to show this menu"); 
   Serial.println("Press 'x' to measure Channel X");
   Serial.println("Press 'y' to measure Channel Y");
   Serial.println("Press 'z' to measure Channel Z");

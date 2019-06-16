@@ -32,6 +32,7 @@ void MeasurePWMX(byte cmd){
           pwm_x_vin = CalculateVin(pwm_x_thi);         
           pwm_x_measurement = GF;
           break;
+        //determine G force values using function 'convert_to_g'
         case GF:
           x_g_force = convert_to_g(pwm_x_vin, calibrated_x_0, calibrated_x_90);         
           pwm_x_measurement = SHOW;
