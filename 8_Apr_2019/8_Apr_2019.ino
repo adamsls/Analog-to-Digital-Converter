@@ -1,28 +1,26 @@
 /******************************************************************
-Filename      :ADC Arduino Code 
+Filename      :sketch_mar06a
 Author        :Fergal Brennan
-               Linda Adams
 Course        :FLASHE Project
-Description   :This is the main file for the FLASHE project
+Description   :This is the main file for the FLAHSE project
 ******************************************************************/
 
 /******************************************************************
 CONSTANT DEFINITNIONS
 ******************************************************************/
 const int TSIG1 =  13;      //TSIG1 is located on pin 13
-const int PWMX  =   8;      //PWMX is located o/n pin 2
+const int PWMX  =   8;      //PWMX is located on pin 2
 const int PWMY  =   7;      //PWMX is located on pin 7
 const int PWMZ  =   2;      //PWMX is located on pin 8
-
-//variables for calibrated values
 float calibrated_x_0;
-float calibrated_x_180;
-float calibrated_y_0;
+float calibrated_x_270;
+float calibrated_x_90;
+float calibrated_y_0_a;
+float calibrated_y_0_b;
 float calibrated_y_180;
-float calibrated_z_0;
+float calibrated_z_0_a;
+float calibrated_z_0_b;
 float calibrated_z_180;
-
-//variables for g forces in all three axes
 float x_g_force = 0;
 float y_g_force = 0;
 float z_g_force = 0;
@@ -45,9 +43,9 @@ MEASUREMENT TYPE DEFINITNIONS
 /******************************************************************
 PROJECT BOARD VALUES
 ******************************************************************/
-#define   TRAMP     1360      //Period of ramp in usec. Specific to each board
-#define   TCLK      5.3      //Period of board clk in usec. Specific to each board
-#define   VCC       5.06      //Board 5V level. Specific to each board
+#define   TRAMP     1422      //Period of ramp in usec. Specific to each board
+#define   TCLK      5.55      //Period of board clk in usec. Specific to each board
+#define   VCC       5.00      //Board 5V level. Specific to each board
 
 /******************************************************************
 VARIABLE DEFINITNIONS
@@ -103,7 +101,6 @@ void setup() {
 //Setup pins that are outputs for this project  
 //For this example we will set pin 13 as an output
   pinMode(TSIG1, OUTPUT); 
-//input will be taken from pins 2, 7 an 8 from accelerometer
   pinMode(PWMX, INPUT);
   pinMode(PWMY, INPUT);
   pinMode(PWMZ, INPUT);
@@ -132,13 +129,13 @@ void loop() {
   if(ok_to_measure_pwmx == 1){
     
     MeasurePWMX(pwm_x_measurement);
-    delay(50);       
+    delay(100);                       //Wait for 100msec before continuing
 
     
     if(pwm_x_measurement == DONE){
       if(cont_flag == true) {
-         pwm_x_measurement = THI;
-         ok_to_measure_pwmx = 1;        
+      pwm_x_measurement = THI;
+      ok_to_measure_pwmx = 1;         //If we've measured everything then stop
     }
     else if (cont_flag == false){
        ok_to_measure_pwmx = 0;       
@@ -149,17 +146,17 @@ void loop() {
 
     if(ok_to_measure_pwmy == 1){
     
-    MeasurePWMY(pwm_y_measurement);    
-    delay(50);                      
+    MeasurePWMY(pwm_y_measurement);
+    delay(100);                       //Wait for 100msec before continuing
     
     if(pwm_y_measurement == DONE){
       if(cont_flag == true) {
-         pwm_y_measurement = THI;
-         ok_to_measure_pwmy = 1;       
+      pwm_y_measurement = THI;
+      ok_to_measure_pwmy = 1;         //If we've measured everything then stop
     }
     else if (cont_flag == false){
        ok_to_measure_pwmy = 0;       
-      }        
+      }        //If we've measured everything then stop
     }
     
   }
@@ -167,16 +164,16 @@ void loop() {
   if(ok_to_measure_pwmz == 1){
     
     MeasurePWMZ(pwm_z_measurement);
-    delay(50);                 
+    delay(100);                       //Wait for 100msec before continuing
     
     if(pwm_z_measurement == DONE){
       if(cont_flag == true) {
-         pwm_z_measurement = THI;
-         ok_to_measure_pwmz = 1;       
+      pwm_z_measurement = THI;
+      ok_to_measure_pwmz = 1;         //If we've measured everything then stop
     }
     else if (cont_flag == false){
        ok_to_measure_pwmz = 0;       
-      }     
+      }        //If we've measured everything then stop
     }
     
   }

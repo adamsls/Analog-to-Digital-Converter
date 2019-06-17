@@ -77,79 +77,85 @@ void Decode(char cmd){
       
      case 'f':
       Serial.println("Measuring x-axis");
-      Serial.println("Tilt board away by 90 degrees and press '1' to measure when ready");     
+      Serial.println("Place board flat and press '1' to measure when ready");     
       break;     
       
     case '1': 
-      calibrated_x_180 = Calibrate(PWMX);
-      x_g_force = -1;
-      Serial.print("180 degrees in x axis: ");
-      Serial.print(calibrated_x_180);
-      Serial.println("V");      
+      calibrated_x_0 = Calibrate(PWMX);
+      x_g_force = 0;
+      Serial.print("0 degrees: ");
+      Serial.println(calibrated_x_0);
       Serial.print("G force: ");
       Serial.println(x_g_force);
-      Serial.println("Tilt board forward by 90 degrees and press '2' to measure when ready");
+      Serial.println("Place board sideways and press '2' to measure when ready");
       break;
 
    case '2': 
-      calibrated_x_0 = Calibrate(PWMX);
+      calibrated_x_90 = Calibrate(PWMX);
+      x_g_force = -1;
+      Serial.print("180 degrees: ");
+      Serial.println(calibrated_x_90);
+      Serial.print("G force: ");
+      Serial.println(x_g_force);
+      Serial.println("Place board sideways in the other direction and press '3' to measure when ready");
+      break;
+
+   case '3': 
+      calibrated_x_270 = Calibrate(PWMX);
       x_g_force = 1;
-      Serial.print("0 degrees in x axis: ");
-      Serial.print(calibrated_x_0);
-      Serial.println("V");      
+      Serial.print("360 degrees: ");
+      Serial.println(calibrated_x_270);
       Serial.print("G force: ");
       Serial.println(x_g_force);
       Serial.println("X-axis calibration completed");
       Serial.println("**********************************");
-      Serial.println("Tilt board 90 degrees to the left and press '3' to begin calibration of y-axis");
-      break;
-
-   case '3': 
-      calibrated_y_180 = Calibrate(PWMY);
-      y_g_force = -1;
-      Serial.print("180 degrees in y axis: ");
-      Serial.print(calibrated_y_180);
-      Serial.println("V");
-      Serial.print("G force: ");
-      Serial.println(y_g_force);
-      Serial.println("Tilt board 90 degrees to the right and press '4' to measure when ready");
+      Serial.println("Press '4' and place board flat to begin calibration of y-axis");
       break;
 
       case '4': 
-      calibrated_y_0 = Calibrate(PWMY);
-      y_g_force = 1;
-      Serial.print("0 degrees in y axis: ");
-      Serial.print(calibrated_y_0);
-      Serial.println("V");
-      Serial.print("G force: ");
-      Serial.println(y_g_force);
-      Serial.println("Y-axis calibration completed");
-      Serial.println("**********************************");
-      Serial.println("Place board upside down and press '5' to begin calibration of z-axis");
+      calibrated_y_0_a = Calibrate(PWMY);
+      Serial.print("0 degrees: ");
+      Serial.println(calibrated_y_0_a);
+      Serial.println("Place board sideways on y-axis and press '5' to measure when ready");
       break;
 
    case '5': 
-      calibrated_z_180 = Calibrate(PWMZ);
-      z_g_force = -1;
-      Serial.print("180 degrees in z axis: ");
-      Serial.print(calibrated_z_180);
-      Serial.println("V");
-      Serial.print("G force: ");
-      Serial.println(z_g_force);
-      Serial.println("Place board flat facing up and press '6' to measure when ready");
-            break;
+      calibrated_y_180 = Calibrate(PWMY);
+      Serial.print("180 degrees: ");
+      Serial.println(calibrated_y_180);
+      Serial.println("Place board flat in the other direction and press '6' to measure when ready");
+      break;
 
    case '6': 
-      calibrated_z_0 = Calibrate(PWMZ);
-      z_g_force = 1;      
-      Serial.print("0 degrees in z axis: ");
-      Serial.print(calibrated_z_0);
-      Serial.println("V");
-      Serial.print("G force: ");
-      Serial.println(z_g_force);
+      calibrated_y_0_b = Calibrate(PWMY);
+      Serial.print("360 degrees: ");
+      Serial.println(calibrated_y_0_b);
+      Serial.println("Y-axis calibration completed");
+      Serial.println("**********************************");
+      Serial.println("Press '7' and place board flat to begin calibration of z-axis");
+      break; 
+
+   case '7': 
+      calibrated_z_0_a = Calibrate(PWMZ);
+      Serial.print("0 degrees: ");
+      Serial.println(calibrated_z_0_a);
+      Serial.println("Lift board up and press '8' to measure when ready");
+      break;
+
+   case '8': 
+      calibrated_z_180 = Calibrate(PWMZ);
+      Serial.print("180 degrees: ");
+      Serial.println(calibrated_z_180);
+      Serial.println("Lift board up further and press '9' to measure when ready");
+      break;
+
+   case '9': 
+      calibrated_z_0_b = Calibrate(PWMZ);
+      Serial.print("360 degrees: ");
+      Serial.println(calibrated_z_0_b);
       Serial.println("Z-axis calibration completed");
       Serial.println("**********************************");
-      break; 
+      break;
        
     case 'c':
 

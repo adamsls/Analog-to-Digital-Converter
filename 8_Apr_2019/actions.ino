@@ -32,9 +32,8 @@ void MeasurePWMX(byte cmd){
           pwm_x_vin = CalculateVin(pwm_x_thi);         
           pwm_x_measurement = GF;
           break;
-        //determine G force values using function 'convert_to_g'
         case GF:
-          x_g_force = convert_to_g(pwm_x_vin, calibrated_x_0, calibrated_x_180);         
+          x_g_force = convert_to_g(pwm_x_vin, calibrated_x_180, calibrated_x_90);         
           pwm_x_measurement = SHOW;
           break;
         case SHOW:
@@ -54,6 +53,7 @@ void MeasurePWMY(byte cmd){
         case THI:
           pwm_y_thi = ReadPulse(PWMY,HIGH);
           pwm_y_measurement = TLO;
+          break;
         case TLO:
           pwm_y_tlo = ReadPulse(PWMY,LOW);
           pwm_y_measurement = TPWM;
@@ -64,16 +64,11 @@ void MeasurePWMY(byte cmd){
           break;
         case VPWM:
           pwm_y_vin = CalculateVin(pwm_y_thi);         
-          pwm_y_measurement = GF;
-          break;
-        //determine G force values using function 'convert_to_g'
-        case GF:
-          y_g_force = convert_to_g(pwm_y_vin, calibrated_y_0, calibrated_y_180);         
           pwm_y_measurement = SHOW;
           break;
         case SHOW:
           ChannelHeader();          
-          ShowPWMY(pwm_y_thi,pwm_y_tlo,pwm_y_tpwm,pwm_y_vin, y_g_force);
+          ShowPWMY(pwm_y_thi,pwm_y_tlo,pwm_y_tpwm,pwm_y_vin);
           pwm_y_measurement = DONE;
           break;
         case DONE:
@@ -88,6 +83,7 @@ void MeasurePWMZ(byte cmd){
         case THI:
           pwm_z_thi = ReadPulse(PWMZ,HIGH);
           pwm_z_measurement = TLO;
+          break;
         case TLO:
           pwm_z_tlo = ReadPulse(PWMZ,LOW);
           pwm_z_measurement = TPWM;
@@ -98,16 +94,11 @@ void MeasurePWMZ(byte cmd){
           break;
         case VPWM:
           pwm_z_vin = CalculateVin(pwm_z_thi);         
-          pwm_z_measurement = GF;
-          break;
-        //determine G force values using function 'convert_to_g'
-        case GF:
-          z_g_force = convert_to_g(pwm_z_vin, calibrated_z_0, calibrated_z_180);         
           pwm_z_measurement = SHOW;
           break;
         case SHOW:
           ChannelHeader();         
-          ShowPWMZ(pwm_z_thi,pwm_z_tlo,pwm_z_tpwm,pwm_z_vin, z_g_force);
+          ShowPWMZ(pwm_z_thi,pwm_z_tlo,pwm_z_tpwm,pwm_z_vin);
           pwm_z_measurement = DONE;
           break;
         case DONE:
@@ -126,9 +117,6 @@ unsigned long ReadPulse(int pin, int state){
   unsigned long t=0;
   
   t = pulseIn(pin, state);
-  if (t < 20) {
-     t = pulseIn(pin,state);    
-  }
 
   return(t);
 }
