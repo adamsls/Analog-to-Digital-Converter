@@ -1,9 +1,5 @@
 /*
 Filename      :comms
-Author        :Fergal Brennan
-Course        :FLASHE Project
-Description   :This file holds the serial port
-*/
 
 /***********************************************
 *  Function    : GetChar

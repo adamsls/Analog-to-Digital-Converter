@@ -1,9 +1,5 @@
 /**************************************************************************
 Filename      :menu
-Author        :Fergal Brennan
-Course        :FLASHE Project
-Description   :This file holds the menu for the command line interface
-**************************************************************************/
 
 /*************************************************************************
 *  Function    : RunMenu

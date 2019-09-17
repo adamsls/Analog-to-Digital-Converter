@@ -1,5 +1,11 @@
+/*
+Filename      :calibrationConversion
 
+/***********************************************
+ * 
 //function to calibrate the board by taking multiple initial measurements and averaging
+
+***********************************************/
 
 float Calibrate (int channel) {
   

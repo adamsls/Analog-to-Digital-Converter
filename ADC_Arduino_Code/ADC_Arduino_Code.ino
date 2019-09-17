@@ -1,10 +1,6 @@
 /******************************************************************
 Filename      :ADC Arduino Code 
-Author        :Fergal Brennan
-               Linda Adams
-Course        :FLASHE Project
-Description   :This is the main file for the FLASHE project
-******************************************************************/
+Author        :Linda Adams
 
 /******************************************************************
 CONSTANT DEFINITNIONS
@@ -88,20 +84,12 @@ unsigned long   pwm_z_tpwm    =0;
 double          pwm_z_vin     =0;
 double          pwm_z_g       =0;
 
-/*
-All projects will have a setup part. This part of the code is where
-you define what pins will be inputs, what pins will be outputs and 
-how the Arduino will operate
-*/
+
 void setup() {
-//Setup the serial port for this project
   Serial.begin(9600);
 
-//Print a message to the screen
   SendWelcomeMessage();
   
-//Setup pins that are outputs for this project  
-//For this example we will set pin 13 as an output
   pinMode(TSIG1, OUTPUT); 
 //input will be taken from pins 2, 7 an 8 from accelerometer
   pinMode(PWMX, INPUT);
@@ -110,10 +98,6 @@ void setup() {
 }
 
 
-/*
-All projects have a loop. The loop is the part of the code the operates 
-indefinately. It is inside the loop where your project happens
-*/
 void loop() {
   
 //Check to see if there is new data from the serial port

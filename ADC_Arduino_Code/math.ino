@@ -1,9 +1,5 @@
 /******************************************************************
-Filename      :math
-Author        :Fergal Brennan
-Course        :FLASHE Project
-Description   :This file implements the math code for the project
-******************************************************************/
+Filename      :maths
 
 /*****************************************************************
 *  Function    : CalculateVin

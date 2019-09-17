@@ -1,10 +1,5 @@
 /******************************************************************
 Filename      :actions
-Author        :Fergal Brennan
-Course        :FLASHE Project
-Description   :This file implements the actions needed to for the 
-              :project, so its here that pins are read and so on.
-******************************************************************/
 
 /*****************************************************************
 *  Function    : MeasurePWMX

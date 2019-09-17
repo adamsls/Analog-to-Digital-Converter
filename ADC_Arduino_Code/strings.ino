@@ -1,9 +1,5 @@
 /*
 Filename      :strings
-Author        :Fergal Brennan
-Course        :FLASHE Project
-Description   :This file holds the string table for the project
-*/
 
 /***********************************************
 *  Function    : ChannelHeader
